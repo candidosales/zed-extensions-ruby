@@ -80,7 +80,10 @@ mod tests {
     fn test_executable_args() {
         let server = FuzzyRubyServer::new();
         let mock_worktree = FakeWorktree::new("/path/to/project".to_string());
-        assert_eq!(server.get_executable_args(&mock_worktree), Vec::<String>::new());
+        assert_eq!(
+            server.get_executable_args(&mock_worktree),
+            Vec::<String>::new()
+        );
     }
 
     #[test]
@@ -129,7 +132,10 @@ mod tests {
         let server = FuzzyRubyServer::new();
         let mut mock_worktree = FakeWorktree::new("/path/to/project".to_string());
         mock_worktree.add_lsp_binary_setting(FuzzyRubyServer::SERVER_ID.to_string(), Ok(None));
-        mock_worktree.set_which("fuzzy".to_string(), Some("/usr/local/bin/fuzzy".to_string()));
+        mock_worktree.set_which(
+            "fuzzy".to_string(),
+            Some("/usr/local/bin/fuzzy".to_string()),
+        );
         let result = server.resolve_binary(FuzzyRubyServer::SERVER_ID, &mock_worktree);
         assert!(result.is_ok());
         assert_eq!(result.unwrap().path, "/usr/local/bin/fuzzy");

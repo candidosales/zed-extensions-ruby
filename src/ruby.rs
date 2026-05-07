@@ -82,7 +82,9 @@ impl zed::Extension for RubyExtension {
                 kanayago.language_server_command(language_server_id, worktree)
             }
             FuzzyRubyServer::SERVER_ID => {
-                let server = self.fuzzy_ruby_server.get_or_insert_with(FuzzyRubyServer::new);
+                let server = self
+                    .fuzzy_ruby_server
+                    .get_or_insert_with(FuzzyRubyServer::new);
                 server.language_server_command(language_server_id, worktree)
             }
             language_server_id => Err(format!("unknown language server: {language_server_id}")),
